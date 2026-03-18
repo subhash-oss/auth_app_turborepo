@@ -17,3 +17,17 @@ exports.getCustomerDetails = async (userId) => {
 
   return result.rows;
 };
+
+//update user name
+
+exports.updateUserName = async (userId, name) => {
+  const result = await db.query(
+    `UPDATE users
+     SET name = $1
+     WHERE id = $2
+     RETURNING id, name, email`,
+    [name, userId]
+  );
+
+  return result.rows[0];
+};
