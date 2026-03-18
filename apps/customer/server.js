@@ -1,6 +1,7 @@
 const express = require("express");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 const userRoutes = require("./src/routes/userRoutes");
+const customerRoutes = require("./src/routes/customerRoutes");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // Handled on customer app (profile, etc.) — must be before /api proxy
 app.use("/api/user", userRoutes);
+app.use("/api/customer", customerRoutes);
 
 app.use(
   "/api",
