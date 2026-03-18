@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const loginLimiter = require("@repo/rate-limit");
 const { login, register } = require("../controllers/authController");
 
 router.get("/login", (req, res) => {
@@ -9,7 +10,7 @@ router.get("/login", (req, res) => {
   });
 });
 
-router.post("/login", login);
+router.post("/login", loginLimiter, login);
 router.post("/register", register);
 
 module.exports = router;
