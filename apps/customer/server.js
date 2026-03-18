@@ -1,5 +1,6 @@
 const express = require("express");
 const { createProxyMiddleware } = require("http-proxy-middleware");
+const userRoutes = require("./src/routes/userRoutes");
 
 const app = express();
 
@@ -8,6 +9,11 @@ const MAX_TRIES = 30;
 
 /** User API (auth, etc.). Start user app first, or set USER_API_URL. */
 const USER_API_URL = process.env.USER_API_URL || "http://127.0.0.1:4000";
+
+app.use(express.json());
+
+// Handled on customer app (profile, etc.) — must be before /api proxy
+app.use("/api/user", userRoutes);
 
 app.use(
   "/api",

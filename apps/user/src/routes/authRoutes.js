@@ -9,13 +9,6 @@ router.get("/login", (req, res) => {
   });
 });
 
-router.get("/register", (req, res) => {
-  res.status(405).set("Allow", "POST").json({
-    message: "Use POST with JSON body: { \"name\": \"...\", \"email\": \"...\", \"password\": \"...\" }",
-    example: "POST http://localhost:4000/api/auth/register",
-  });
-});
-
 router.post("/login", login);
 router.post("/register", register);
 
